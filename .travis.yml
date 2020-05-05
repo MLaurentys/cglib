@@ -1,0 +1,4 @@
+script
+  - echo "Run Base Debug Tests"
+  - g++ -BASE_DEBUG main.cpp
+  - ./a.out
