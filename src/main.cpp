@@ -1,11 +1,16 @@
 #include <cassert>
 #include <iostream>
 
+#include "game_number.hpp"
+
+
 void test () {
-    assert (1 + 1 == 2);
+    GameNumber gn = GameNumber (3);
+    std::cout << gn.get_float() << "\n\n";
+    assert (gn.get_float() == 3.0f);
 }
 int main () {
-    #ifdef BASE_DEBUG
+    #ifndef NOT_DEBUG
     std::cout << "Debug mode\n";
     test ();
     #else
