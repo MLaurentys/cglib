@@ -3,22 +3,22 @@
 
 #include <vector>
 #include <variant>
+#include <any>
 #include <iostream>
 
 #include "definitions.h"
 
-template <GNRepresentation repr> class GNSpecialized {
-    float to_float() { std::static}
-};
+
+template <GNRepresentation repr> class GNSpecialized {};
 
 template <>
-class GNSpecialized<GNRepresentation::sets> {
+class GNSpecialized <GNRepresentation::sets> {
     public:
         GNSpecialized () {left = {}; right = {};}
-        GNSpecialized (const std::vector<GNSpecialized *>& ,
-                const std::vector<GNSpecialized *>& ) {
-            //left = l;
-            //right = r;
+        GNSpecialized (const std::vector<GNSpecialized *>& l,
+                const std::vector<GNSpecialized *>& r) {
+            left = l;
+            right = r;
         } 
 
         float to_float() {
@@ -30,7 +30,7 @@ class GNSpecialized<GNRepresentation::sets> {
 };
 
 template <>
-class GNSpecialized<GNRepresentation::integer> {
+class GNSpecialized <GNRepresentation::integer> {
     public:
         GNSpecialized () {n = 0;}
         GNSpecialized (int m) {n = m;}
@@ -46,7 +46,7 @@ class GNSpecialized<GNRepresentation::integer> {
 };
 
 template <>
-class GNSpecialized<GNRepresentation::real> {
+class GNSpecialized <GNRepresentation::real> {
     public:
         GNSpecialized () {n = 0;}
         GNSpecialized (float m) {n = m;}

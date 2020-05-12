@@ -8,6 +8,7 @@ GameNumber::GameNumber (int n) {
     std::cout << "decltype(i) is " << type_name<decltype(gn)>() << '\n';
     gn = GNSpecialized<GNRepresentation::integer> (n);
     std::cout << "decltype(i) is " << type_name<decltype(gn)>() << '\n';
+    gn.print_n();
 }
 
 GameNumber::GameNumber (float n) {

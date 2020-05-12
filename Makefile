@@ -1,6 +1,7 @@
 CC = g++
 
-OP1  = -std=c++17 -Wall -Wextra -Wpedantic -Wshadow -pedantic 
+OP1  = -std=c++17 
+OP5 = -Wall -Wextra -Wpedantic -Wshadow -pedantic 
 OP4 = -Wno-unused-result -Wno-unused-function -Wsequence-point
 OP3 = -g -O0
 

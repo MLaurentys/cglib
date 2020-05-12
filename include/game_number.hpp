@@ -2,7 +2,7 @@
 #include <vector>
 
 #include "definitions.h"
-#include "GNSpecializations.hpp"
+#include "GNSpecializations2.hpp"
 
 #include <type_traits>
 #include <typeinfo>
