@@ -16,7 +16,8 @@ T::GameNumberS (std::vector<std::shared_ptr<GameNumber>>&& l,
 }
 
 std::shared_ptr<GameNumber> T::get_max_left() const{
-    std::shared_ptr<GameNumber> max;
+    std::shared_ptr<GameNumber> max = std::make_shared<GameNumberS<GNRepresentation::real>>
+        (std::numeric_limits<float>::min());
     for (auto& g : left)
         if (*g > *max)
             max = g;
@@ -24,7 +25,8 @@ std::shared_ptr<GameNumber> T::get_max_left() const{
 }
 
 std::shared_ptr<GameNumber> T::get_min_right() const{
-    std::shared_ptr<GameNumber> min;
+    std::shared_ptr<GameNumber> min = std::make_shared<GameNumberS<GNRepresentation::real>>
+        (std::numeric_limits<float>::max());
     for (auto& g : right)
         if (*g < *min)
             min = g;
@@ -33,7 +35,7 @@ std::shared_ptr<GameNumber> T::get_min_right() const{
 
 float T::get_float () const {
     float ret;
-    
+    std::cout << "ENTROU" << std::endl;
     if (left.size() == 0.0f)
         if (right.size() == 0.0f)
             ret = 0.0f;
