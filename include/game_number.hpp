@@ -3,49 +3,45 @@
 #include <memory>
 #include "definitions.h"
 
-template <class T>
+
 class GameNumber {
-// public:
-//     float get_float () {
-//         static_cast<T*>(this)->get_float();
-//     }
-// public:
-//     GameNumber ();
-//     GameNumber (std::vector<GameNumber*>& left, std::vector<GameNumber*>& right);
-//     GameNumber (const std::string& string_representation);
-//     GameNumber (const GameNumber&);
-//     GameNumber (GameNumber&&);
-//     ~GameNumber ();
+public:
+    virtual float get_float() const {}
 
-//     GameNumber& operator = (const GameNumber&);
-//     GameNumber& operator = (const GameNumber&&);
+    bool operator==(const GameNumber& other);
+    bool operator<(const GameNumber& other);
+    bool operator<(const GameNumber& other);
 
-//     void get_fraction();
-//     float get_float();
+    ~GameNumber() {}
 
-//     bool is_surreal();
-// private:
-//     GameNumber& get_max_L();
-//     GameNumber& get_min_R();
+protected:
+    GameNumber() {};
 };
 
+template <GNRepresentation repr>
+class GameNumberS {};
 
-class GameNumber_real : public GameNumber<GameNumber_real> {
+template<>
+class GameNumberS<GNRepresentation::real> : public GameNumber {
 public:
-    GameNumber_real (float m) {n = m;}
+    GameNumberS (float m) {n = m;}
+    virtual float get_float() const override;
+    ~GameNumberS(){}
 private:
     float n;
 };
 
-class GameNumber_sets : public GameNumber<GameNumber_sets> {
+template<>
+class GameNumberS<GNRepresentation::sets> : public GameNumber {
 public:
-    GameNumber_sets (float n, float m) {
-        left.push_back (std::make_shared<GameNumber_real>
-            (GameNumber_real(n)));
-        right.push_back (std::make_shared<GameNumber_real>
-            (GameNumber_real(m)));
-    }
+    GameNumberS () {};
+    GameNumberS (float n, float m);
+    virtual float get_float() const override;
+    ~GameNumberS() {}
 private:
-    std::vector <std::shared_ptr<GameNumber>> left;
-    std::vector <std::shared_ptr<GameNumber>> right;
+    std::vector<std::shared_ptr<GameNumber>> left;
+    std::vector<std::shared_ptr<GameNumber>> right;
+
+    std::shared_ptr<GameNumber> get_max_left();
+    std::shared_ptr<GameNumber> get_min_right();
 };

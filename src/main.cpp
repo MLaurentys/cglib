@@ -1,13 +1,14 @@
 #include <cassert>
 #include <iostream>
 
-#include "game_number_copy.hpp"
+#include "game_number.hpp"
 
+using namespace std;
 
 void test () {
-    GameNumber gn = GameNumber_real (3.0f);
-    std::cout << gn.get_float() << "\n\n";
-    assert (gn.get_float() == 3.0f);
+    GameNumber gn = GameNumberS<GNRepresentation::real> (10.0f);
+    GameNumber gn2 = GameNumberS<GNRepresentation::sets> (3.0f, 5.0f);
+    cout << (gn == gn2) << endl;
 }
 int main () {
     #ifndef NOT_DEBUG

@@ -26,7 +26,7 @@ SRC_DIR = src
 
 #objects
 INC_OBJ_T = \
-game_number_copy.o
+game_number.o
 
 LIB_OBJ_T = \
 
