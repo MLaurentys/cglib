@@ -1,8 +1,7 @@
 CC = g++
 
-OP1  = -std=c++17 
-OP5 = -Wall -Wextra -Wpedantic -Wshadow -pedantic 
-OP4 = -Wno-unused-result -Wno-unused-function -Wsequence-point
+OP1  = -std=c++17 -Wall -Wextra -Wpedantic -Wshadow -pedantic 
+OP2 = -Wno-unused-result -Wno-unused-function -Wsequence-point
 OP3 = -g -O0
 
 #You can change
@@ -22,11 +21,19 @@ LIB_OBJ_DIR = ../lib/bin
 INC_OBJ_DIR = bin
 INCLUDE_T = $(INC_DIR) $(LIB_DIR)
 INCLUDE = $(foreach dir, $(INCLUDE_T) $(INC_OBJ_DIR), -I$(dir))
+
+#cpp files
 SRC_DIR = src
+LIB_SRC_FILES = \
+game_number.cpp \
+game_number_real.cpp \
+game_number_sets.cpp
 
 #objects
 INC_OBJ_T = \
-game_number.o
+game_number.o \
+game_number_real.o \
+game_number_sets.o
 
 LIB_OBJ_T = \
 
@@ -40,7 +47,7 @@ default: lib
 #compile the library
 lib: $(INC_OBJ)
 
-#compile library c files
+#compile library files
 $(INC_OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 	$(MKDIR) $(INC_OBJ_DIR)
 	$(CC) $(CFLAGS_ALL) $(INCLUDE) -c $< -o $@

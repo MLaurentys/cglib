@@ -1,8 +1,15 @@
-#include "game_number.hpp"
+#include "game_number_repr.hpp"
 
-float GameNumberS<GNRepresentation::real>::get_float() const {
+using T = GameNumberS<GNRepresentation::real>;
+
+T::GameNumberS (GameNumberS&& other) noexcept{
+    n = other.get_float();
+}
+
+float T::get_float() const {
     return n;
 }
+
 
 // GameNumber::GameNumber (float n) {
 // }
