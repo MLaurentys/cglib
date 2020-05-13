@@ -1,11 +1,11 @@
 #include <cassert>
 #include <iostream>
 
-#include "game_number.hpp"
+#include "game_number_copy.hpp"
 
 
 void test () {
-    GameNumber gn = GameNumber (3);
+    GameNumber gn = GameNumber_real (3.0f);
     std::cout << gn.get_float() << "\n\n";
     assert (gn.get_float() == 3.0f);
 }
