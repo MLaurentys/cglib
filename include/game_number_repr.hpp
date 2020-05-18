@@ -9,9 +9,11 @@ class GameNumberS {};
 template<>
 class GameNumberS<GNRepresentation::real> : public GameNumber {
 public:
-    GameNumberS (float m) {n = m;}
-    virtual float get_float() const override;
     GameNumberS (GameNumberS&& other) noexcept;
+    GameNumberS (float m) {n = m;}
+
+    float get_float() const override;
+
     ~GameNumberS(){}
 private:
     float n;
@@ -23,13 +25,15 @@ public:
     GameNumberS () {};
     GameNumberS (std::vector<std::shared_ptr<GameNumber>>&& l,
         std::vector<std::shared_ptr<GameNumber>>&& r);
-    virtual float get_float() const override;
     GameNumberS (GameNumberS&& other) noexcept;
+    // GameNumberS (const std::string&);
 
+    float get_float() const override;
     bool is_surreal() const override;
 
     ~GameNumberS() {}
 private:
+    GameNumberS (const std::string&, int);
     std::vector<std::shared_ptr<GameNumber>> left;
     std::vector<std::shared_ptr<GameNumber>> right;
 
