@@ -8,7 +8,7 @@
 #include <cmath>
 #include <iostream>
 #include <limits>
-#include "definitions.h"
+#include "definitions.hpp"
 
 
 class GameNumber {

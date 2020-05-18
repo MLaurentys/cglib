@@ -7,7 +7,8 @@ OP3 = -g -O0
 #You can change
 CFLAGS  = $(OP1) $(OP2) $(OP3)
 #Should NOT change
-CFLAGS_ALL = $(CFLAGS)
+CFLAGS_ALL2 = $(CFLAGS)
+CFLAGS_ALL = -std=c++17
 
 #auxiliary variables
 MKDIR = mkdir -p
@@ -16,10 +17,10 @@ EXEC_NAME = $(OUT_DIR)/game_numbers
 
 #include files
 INC_DIR = include
-LIB_DIR = ../lib
-LIB_OBJ_DIR = ../lib/bin
+LIB_OBJ_DIR = bin -l$(GN_LIB)
+THIS_LIB = lib
 INC_OBJ_DIR = bin
-INCLUDE_T = $(INC_DIR) $(LIB_DIR)
+INCLUDE_T = $(INC_DIR)
 INCLUDE = $(foreach dir, $(INCLUDE_T) $(INC_OBJ_DIR), -I$(dir))
 
 #cpp files
@@ -28,6 +29,11 @@ LIB_SRC_FILES = \
 game_number.cpp \
 game_number_real.cpp \
 game_number_sets.cpp
+
+INCLUDE_FILES = \
+game_number.hpp \
+game_number_repr.hpp \
+definitions.hpp
 
 #objects
 INC_OBJ_T = \
@@ -39,13 +45,19 @@ LIB_OBJ_T = \
 
 
 INC_OBJ = $(addprefix $(INC_OBJ_DIR)/, $(INC_OBJ_T))
+INC_HEADERS = $(addprefix $(INC_DIR)/, $(INCLUDE_FILES))
 LIB_OBJ = $(addprefix $(LIB_OBJ_DIR)/, $(LIB_OBJ_T))
+
+AR_LIB = lib/libgame_number.a
+GN_LIB = game_number
 default: lib
 	$(MKDIR) $(OUT_DIR)
-	$(CC) $(CFLAGS_ALL) $(INCLUDE) $(INC_OBJ) $(LIB_OBJ) src/main.cpp -o $(EXEC_NAME)
+	$(CC) -static $(CFLAGS_ALL) -I$(INC_DIR) -Ibin $(INC_HEADERS) src/main.cpp -L$(THIS_LIB) -l$(GN_LIB) -o $(EXEC_NAME)
 
 #compile the library
 lib: $(INC_OBJ)
+	$(MKDIR) $(THIS_LIB)
+	ar rcs $(AR_LIB) $(INC_OBJ)
 
 #compile library files
 $(INC_OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
@@ -55,5 +67,6 @@ $(INC_OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 print-%: ; @echo $* = $($*)
 
 clean:
-	rm -rf $(OUT_DIR) 
-	rm -rf $(INC_OBJ_DIR) 
+	rm -rf $(OUT_DIR)
+	rm -rf $(INC_OBJ_DIR)
+	rm -rf $(THIS_LIB)
