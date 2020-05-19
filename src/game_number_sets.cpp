@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "game_number_repr.hpp"
+#include "../include/game_number_repr.hpp"
 
 using T = GameNumberS<GNRepresentation::sets>;
 
