@@ -78,7 +78,6 @@ std::shared_ptr<GameNumber> T::get_min_right() const{
 // 2.5 = <2|3>
 float T::get_float () const {
     float ret;
-    std::cout << "ENTROU" << std::endl;
     if (left.size() == 0.0f)
         if (right.size() == 0.0f)
             ret = 0.0f;

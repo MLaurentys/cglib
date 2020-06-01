@@ -27,6 +27,11 @@ public:
         std::vector<std::shared_ptr<GameNumber>>&& r);
     GameNumberS (GameNumberS&& other) noexcept;
     // GameNumberS (const std::string&);
+    template <typename Titable, typename Uittor>
+    GameNumberS (const Titable&, float* (Titable::*get_eval)() const,
+                 std::tuple<Uittor, Uittor> (Titable::*lIt)(),
+                 std::tuple<Uittor, Uittor> (Titable::*rIt)());
+
 
     float get_float() const override;
     bool is_surreal() const override;
@@ -40,5 +45,32 @@ private:
     std::shared_ptr<GameNumber> get_max_left() const;
     std::shared_ptr<GameNumber> get_min_right() const;
 };
+
+using realGN = GameNumberS<GNRepresentation::real>;
+using setsGN = GameNumberS<GNRepresentation::sets>;
+using std::get;
+
+template <typename Titable, typename Uittor>
+GameNumberS<GNRepresentation::sets>::GameNumberS
+        (const Titable& game, float* (Titable::*get_eval)() const,
+         std::tuple<Uittor, Uittor> (Titable::*lIt)(),
+         std::tuple<Uittor, Uittor> (Titable::*rIt)()) {
+    if (game.get_eval() != nullptr) throw std::invalid_argument(
+      "Attempt to create a non-set game number using sets constructor");
+    auto lIter = game.lIt();
+    auto rIter = game.rIt();
+    for (auto it = get<0>(lIter); it != get<1>(lIter); ++it) {
+        if (*it.get_eval() != nullptr)
+            left.push_back(std::make_shared<realGN>(*(*it.get_eval())));
+        else
+            left.push_back(std::make_shared<setsGN>(*it, get_eval, lIt, rIt));
+    }
+    for (auto it = get<0>(rIter); it != get<1>(rIter); ++it) {
+        if (*it.get_eval() != nullptr)
+            right.push_back(std::make_shared<realGN>(*(*it.get_eval())));
+        else
+            right.push_back(std::make_shared<setsGN>(*it, get_eval, lIt, rIt));
+    }
+}
 
 #endif
