@@ -10,7 +10,7 @@ template<>
 class GameNumberS<GNRepresentation::real> : public GameNumber {
 public:
     GameNumberS (GameNumberS&& other) noexcept;
-    GameNumberS (float m) {n = m;}
+    GameNumberS (float);
 
     float get_float() const override;
 
@@ -22,7 +22,6 @@ private:
 template<>
 class GameNumberS<GNRepresentation::sets> : public GameNumber {
 public:
-    GameNumberS () {};
     GameNumberS (std::vector<std::shared_ptr<GameNumber>>&& l,
         std::vector<std::shared_ptr<GameNumber>>&& r);
     GameNumberS (GameNumberS&& other) noexcept;

@@ -4,16 +4,11 @@
 
 using T = GameNumberS<GNRepresentation::sets>;
 
-T::GameNumberS (GameNumberS&& other) noexcept{
-    left = {std::move(other.left)};
-    right = {std::move(other.right)};
-}
+T::GameNumberS (GameNumberS&& other) noexcept : 
+    left{std::move(other.left)}, right{std::move(other.right)} {}
 
 T::GameNumberS (std::vector<std::shared_ptr<GameNumber>>&& l,
-    std::vector<std::shared_ptr<GameNumber>>&& r) {
-    left = l;
-    right = r;
-}
+    std::vector<std::shared_ptr<GameNumber>>&& r) : left{l}, right{r} {}
 
 // std::pair<std::shared_ptr<GameNumber>, int>
 // parse_string(const std::string& code, int s_ind) {

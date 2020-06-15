@@ -2,13 +2,12 @@ CC = g++
 
 OP1  = -std=c++17 -Wall -Wextra -Wpedantic -Wshadow -pedantic 
 OP2 = -Wno-unused-result -Wno-unused-function -Wsequence-point
-OP3 = -g -O0
+OP3 = -Weffc++ -g -O0
 
 #You can change
 CFLAGS  = $(OP1) $(OP2) $(OP3)
 #Should NOT change
-CFLAGS_ALL2 = $(CFLAGS)
-CFLAGS_ALL = -std=c++17
+CFLAGS_ALL = $(CFLAGS)
 
 #auxiliary variables
 MKDIR = mkdir -p

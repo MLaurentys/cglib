@@ -25,7 +25,7 @@ public:
     bool operator>=(const GameNumber& other);
     bool operator>(const GameNumber& other);
 
-    ~GameNumber() {}
+    virtual ~GameNumber() {}
 
 protected:
     GameNumber() {};
