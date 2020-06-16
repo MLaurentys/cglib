@@ -57,7 +57,8 @@ template <typename Titable, typename Uittor>
 GameNumberS<GNRepresentation::sets>::GameNumberS
         (const Titable& game, float* (Titable::*get_eval)() const,
          std::tuple<Uittor, Uittor> (Titable::*lIt)(),
-         std::tuple<Uittor, Uittor> (Titable::*rIt)()) {
+         std::tuple<Uittor, Uittor> (Titable::*rIt)())
+            : left{}, right{} {
     if (game.get_eval() != nullptr) throw std::invalid_argument(
       "Attempt to create a non-set game number using sets constructor");
     auto lIter = game.lIt();
@@ -78,10 +79,11 @@ GameNumberS<GNRepresentation::sets>::GameNumberS
 
 template <typename Titable, typename Uittor>
 GameNumberS<GNRepresentation::sets>::GameNumberS (
-                const Titable& game,
-                float* (get_eval) (const Titable&),
-                std::tuple<Uittor, Uittor> (lIt) (const Titable&),
-                std::tuple<Uittor, Uittor> (rIt) (const Titable&)) {
+        const Titable& game,
+        float* (get_eval) (const Titable&),
+        std::tuple<Uittor, Uittor> (lIt) (const Titable&),
+        std::tuple<Uittor, Uittor> (rIt) (const Titable&)) 
+            : left{}, right{} {
     if (get_eval(game) != nullptr) throw std::invalid_argument(
       "Attempt to create a non-set game number using sets constructor");
     auto lIter = lIt(game);
