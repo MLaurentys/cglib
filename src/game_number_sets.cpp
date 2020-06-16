@@ -10,43 +10,6 @@ T::GameNumberS (GameNumberS&& other) noexcept :
 T::GameNumberS (std::vector<std::shared_ptr<GameNumber>>&& l,
     std::vector<std::shared_ptr<GameNumber>>&& r) : left{l}, right{r} {}
 
-// std::pair<std::shared_ptr<GameNumber>, int>
-// parse_string(const std::string& code, int s_ind) {
-    // example: GN := <GN,GN,GN|GN,GN,GN,GN,GN>
-//     try {
-//         std::vector<std::shared_ptr<GameNumber>> left;
-//         std::vector<std::shared_ptr<GameNumber>> right;
-//         // code[s_ind] = '<' -> expected
-//         ++s_ind;
-//         bool add_to_left = true;
-//         std::shared_ptr<GameNumber> gn; int n_ind;
-//         while (code[s_ind] != '>') {
-//             if (code[s_ind] == '|')
-//                 add_to_left = false;
-//             else if (code[s_ind] == '<') {
-//                 std::tie(gn, n_ind) = parse_string (code, s_ind);
-//                 if (add_to_left) left.push_back(gn);
-//                 else right.push_back (gn);
-//                 s_ind = n_ind;
-//             }
-//             else if (code[s_ind] == ',');
-//             else throw std::invalid_argument("Function parse_string");
-//             ++s_ind;
-//         }
-//         return {std::make_shared<GameNumber>(std::move(left), std::move(right)), s_ind};
-//     }
-//     catch (std::exception e) {
-//         std::cout << "Invalid string to SN conversion." << std::endl;
-//         throw e;
-//     }
-// }
-// T::GameNumberS (const std::string& code, int ind) {
-    
-// }
-// T::GameNumberS (const std::string& code) {
-//     GameNumberS(code, 0);
-// }
-
 std::shared_ptr<GameNumber> T::get_max_left() const{
     std::shared_ptr<GameNumber> max = std::make_shared<GameNumberS<GNRepresentation::real>>
         (std::numeric_limits<float>::min());
