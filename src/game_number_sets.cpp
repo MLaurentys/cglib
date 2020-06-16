@@ -36,13 +36,14 @@ std::shared_ptr<GameNumber> T::get_min_right() const{
 // 2.5 = <2|3>
 float T::get_float () const {
     float ret;
-    if (left.size() == 0.0f)
-        if (right.size() == 0.0f)
+    if (left.empty())
+        if (right.empty())
             ret = 0.0f;
         else
-            ret = std::floor(get_min_right()->get_float()) - 1.0f;
-    else if (right.size() == 0.0f)
-        ret = std::floor (get_min_right()->get_float()) + 1.0f;
+            ret = std::min(std::floor(get_min_right()->get_float()),
+                           0.0f);
+    else if (right.empty())
+        ret = std::max(std::ceil(get_max_left()->get_float()), 0.0f);
     else {
         float maxL = get_max_left()->get_float();
         float minR = get_min_right()->get_float();
