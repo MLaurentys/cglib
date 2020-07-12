@@ -25,12 +25,10 @@ public:
     GameNumberS (std::vector<std::shared_ptr<GameNumber>>&& l,
         std::vector<std::shared_ptr<GameNumber>>&& r);
     GameNumberS (GameNumberS&& other) noexcept;
-    // GameNumberS (const std::string&);
     template <typename Titable, typename Uittor>
     GameNumberS (const Titable&, float* (Titable::*get_eval)() const,
                  std::tuple<Uittor, Uittor> (Titable::*lIt)(),
                  std::tuple<Uittor, Uittor> (Titable::*rIt)());
-
     template <typename Titable, typename Uittor>
     GameNumberS (const Titable&, float* (get_eval) (const Titable&),
                  std::tuple<Uittor, Uittor> (lIt) (const Titable&),

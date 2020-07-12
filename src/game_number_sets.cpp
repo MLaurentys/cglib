@@ -28,12 +28,6 @@ std::shared_ptr<GameNumber> T::get_min_right() const{
     return min;
 }
 
-// -1 = <|-1/2>
-// -2 = <|-1>
-// 1 = <0|>
-
-// 3 = <2|90>
-// 2.5 = <2|3>
 float T::get_float () const {
     float ret;
     if (left.empty())
