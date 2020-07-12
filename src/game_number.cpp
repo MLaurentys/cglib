@@ -1,9 +1,9 @@
-#include "../include/game_number.hpp"
+/*
+ * This file contain the definition for the methods defined in the correspondant
+ *  header file.
+ */
 
-float GameNumber::get_float() const {
-    std::cout << "Poly fail" << std::endl;
-    return 0.0f;
-}
+#include "../include/game_number.hpp"
 
 bool GameNumber::operator ==(const GameNumber& other) {
     return get_float() == other.get_float();

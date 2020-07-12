@@ -1,25 +1,32 @@
 #include <cassert>
 #include <iostream>
+#include <memory>
 
+#include "game_number.hpp"
 #include "game_number_repr.hpp"
 
 using std::cout, std::endl;
-
+using gn_ptr = std::unique_ptr<GameNumber>;
+using sets = GameNumberS<GNRepresentation::sets>;
+using real = GameNumberS<GNRepresentation::real>;
 
 void test1 () {
     std::vector<std::shared_ptr<GameNumber>> s =
         {std::make_shared<realGN>(3.0f)};
     std::vector<std::shared_ptr<GameNumber>> t =
         {std::make_shared<realGN>(5.0f)};
-    const GameNumber& gn = GameNumberS<GNRepresentation::real>(10.0f);
-    const GameNumber& gn2 = GameNumberS<GNRepresentation::sets>(std::move(s),
-                                                        std::move(t));
-    cout << (&gn == &gn2) << endl;
-    cout << (&gn != &gn2) << endl;
-    cout << (&gn <  &gn2) << endl;
-    cout << (&gn <= &gn2) << endl;
-    cout << (&gn >  &gn2) << endl;
-    cout << (&gn >= &gn2) << endl;
+
+    std::unique_ptr<GameNumber> gn =
+        std::make_unique<GameNumberS<GNRepresentation::real>>(10.0f);
+    std::unique_ptr<GameNumber> gn2 = 
+        std::make_unique<GameNumberS<GNRepresentation::sets>>(std::move(s),
+                                                              std::move(t));
+    cout << (*gn == *gn2) << endl;
+    cout << (*gn != *gn2) << endl;
+    cout << (*gn <  *gn2) << endl;
+    cout << (*gn <= *gn2) << endl;
+    cout << (*gn >  *gn2) << endl;
+    cout << (*gn >= *gn2) << endl;
 }
 void test2 () {
     // <10.5|11>
@@ -37,7 +44,7 @@ int main () {
     #ifndef NOT_DEBUG
     std::cout << "Debug Mode\n";
     test1();
-    test2 ();
+    test2();
     #else
     std::cout << "Release Mode\n";
     #endif
