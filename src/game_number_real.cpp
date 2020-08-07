@@ -1,11 +1,21 @@
-#include "../include/game_number_repr.hpp"
+/*
+ * This file implements the GameNumberReal class
+ */
 
-using T = GameNumberS<GNRepresentation::real>;
+#include "../include/game_number_real.hpp"
 
-T:: GameNumberS (float val) : n{val} {}
+GameNumberReal::GameNumberReal (float val) {
+    _surreal = true;
+    _real_value = val;
+    _switch = false;
+}
 
-T::GameNumberS (GameNumberS&& other) noexcept : n{other.get_float()} {}
+GameNumberReal::GameNumberReal (GameNumberReal&& other) noexcept {
+    _surreal = other._surreal;
+    _real_value = other._real_value;
+    _switch = false;
+}
 
-float T::get_float() const {
-    return n;
+float GameNumberReal::get_temperature () const {
+    return 0.0f; //every real number is a cool game
 }

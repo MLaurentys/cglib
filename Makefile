@@ -31,7 +31,8 @@ game_number_sets.cpp
 
 INCLUDE_FILES = \
 game_number.hpp \
-game_number_repr.hpp \
+game_number_real.hpp \
+game_number_sets.hpp \
 definitions.hpp
 
 #objects
