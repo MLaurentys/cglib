@@ -2,4 +2,18 @@
 
 # cglib
 
-### cglib is a performance-focused library to evaluate combinatorial games.
+cglib is a library to evaluate combinatorial games.
+
+-------
+
+### Dependencies
+
+#### To generate lib
+
+None
+
+#### To run tests
+
+- gtest
+- gmock
+- pthread
