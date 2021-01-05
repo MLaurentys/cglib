@@ -3,4 +3,3 @@
 # cglib
 
 ### cglib is a performance-focused library to evaluate combinatorial games.
-
