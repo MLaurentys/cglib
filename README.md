@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/MLaurentys/game_numbers.svg?branch=master)](https://travis-ci.org/MLaurentys/cglib)
+[![Build Status](https://travis-ci.org/MLaurentys/cglib.svg?branch=master)](https://travis-ci.org/MLaurentys/cglib)
 
 # cglib
 
