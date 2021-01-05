@@ -1,5 +1,6 @@
-[![Build Status](https://travis-ci.org/MLaurentys/game_numbers.svg?branch=master)](https://travis-ci.org/MLaurentys/game_numbers)
+[![Build Status](https://travis-ci.org/MLaurentys/game_numbers.svg?branch=master)](https://travis-ci.org/MLaurentys/cglib)
 
-# Game Numbers
-### Game Numbers as in surreal numbers and 'not numbers' from Winning Ways [Berlekamp, Conway and Guy]
+# cglib
+
+### cglib is a performance-focused library to evaluate combinatorial games.
 
