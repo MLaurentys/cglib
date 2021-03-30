@@ -9,7 +9,8 @@
 #include "game_number.hpp"
 #include "game_number_real.hpp"
 
-using std::get, std::make_shared;
+using std::get;
+using std::make_shared;
 
 class GameNumberSets : public GameNumber {
 public:
