@@ -13,12 +13,12 @@
  *  until the '0 = < {} | {} >' base case.
  */
 class GameNumberReal : public GameNumber {
-public:
-    GameNumberReal (GameNumberReal&& other) noexcept;
-    GameNumberReal (float);
+      public:
+        GameNumberReal(GameNumberReal &&other) noexcept;
+        GameNumberReal(float);
 
-    float get_temperature () const override;
-    ~GameNumberReal(){}
+        float get_temperature() const override;
+        ~GameNumberReal() {}
 };
 
 #endif

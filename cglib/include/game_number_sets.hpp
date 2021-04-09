@@ -13,56 +13,67 @@ using std::get;
 using std::make_shared;
 
 class GameNumberSets : public GameNumber {
-public:
-    // Most basic constructor. Also used because it makes testing is easier.
-    GameNumberSets (std::vector<std::shared_ptr<GameNumber>>&& l,
-        std::vector<std::shared_ptr<GameNumber>>&& r);
-    GameNumberSets (GameNumberSets&& other) noexcept;
-    // This constructor is used because it allows the ability to create a number
-    //  from a pre-built game tree.
-    template <typename Titable, // type of the iterable core
-              typename Uittor> // type of the iterator through the core
-    GameNumberSets (
-        const Titable&, //root of the game-tree
-        float* (get_eval) (const Titable&), //function to evaluate
-        std::tuple<Uittor, Uittor> (lIt) (const Titable&),  // L begin/end iters
-        std::tuple<Uittor, Uittor> (rIt) (const Titable&)); // R brgin/end iters
+      public:
+        // Most basic constructor. Also used because it makes testing easier
+        GameNumberSets(float number);
+        // Another basic constructor. Also used because it makes testing easier
+        GameNumberSets(const std::vector<float> &l,
+                       const std::vector<float> &r);
+        GameNumberSets(std::vector<std::shared_ptr<GameNumber>> &&l,
+                       std::vector<std::shared_ptr<GameNumber>> &&r);
+        GameNumberSets(GameNumberSets &&other) noexcept;
+        // This constructor is used because it allows the ability to create a
+        // numberc from a pre-built game tree.
+        template <typename Titable, // type of the iterable core
+                  typename Uittor>  // type of the iterator through the core
+        GameNumberSets(
+            const Titable &,                    // root of the game-tree
+            float *(get_eval)(const Titable &), // function to evaluate
+            std::tuple<Uittor, Uittor>(lIt)(
+                const Titable &), // L begin/end iters
+            std::tuple<Uittor, Uittor>(rIt)(
+                const Titable &)); // R brgin/end iters
 
-    float get_temperature () const override;
-    ~GameNumberSets () {}
-private:
-    void init ();
+        float get_temperature() const override;
+        ~GameNumberSets() {}
 
-    std::vector<std::shared_ptr<GameNumber>> left;
-    std::vector<std::shared_ptr<GameNumber>> right;
+      private:
+        void init();
 
-    std::shared_ptr<GameNumber> get_max_left() const;
-    std::shared_ptr<GameNumber> get_min_right() const;
+        std::vector<std::shared_ptr<GameNumber>> left;
+        std::vector<std::shared_ptr<GameNumber>> right;
+
+        std::shared_ptr<GameNumber> get_max_left() const;
+        std::shared_ptr<GameNumber> get_min_right() const;
 };
 
 template <typename Titable, typename Uittor>
-GameNumberSets::GameNumberSets (
-        const Titable& game,
-        float* (get_eval) (const Titable&),
-        std::tuple<Uittor, Uittor> (lIt) (const Titable&),
-        std::tuple<Uittor, Uittor> (rIt) (const Titable&))
-            : left{}, right{} {
-    if (get_eval(game) != nullptr) throw std::invalid_argument(
-        "Attempt to create a non-set game number using sets constructor");
-    auto lIter = lIt(game);
-    auto rIter = rIt(game);
-    for (auto it = get<0>(lIter); it != get<1>(lIter); ++it) {
-        if (get_eval(*it) != nullptr)
-            left.push_back(make_shared<GameNumberReal>(*(get_eval(*it))));
-        else
-            left.push_back(make_shared<GameNumberSets>(*it, get_eval, lIt, rIt));
-    }
-    for (auto it = get<0>(rIter); it != get<1>(rIter); ++it) {
-        if (get_eval(*it) != nullptr)
-            right.push_back(make_shared<GameNumberReal>(*(get_eval(*it))));
-        else
-            right.push_back(make_shared<GameNumberSets>(*it, get_eval, lIt, rIt));
-    }
-    init();
+GameNumberSets::GameNumberSets(const Titable &game,
+                               float *(get_eval)(const Titable &),
+                               std::tuple<Uittor, Uittor>(lIt)(const Titable &),
+                               std::tuple<Uittor, Uittor>(rIt)(const Titable &))
+    : left{}, right{} {
+        if (get_eval(game) != nullptr)
+                throw std::invalid_argument("Attempt to create a non-set game "
+                                            "number using sets constructor");
+        auto lIter = lIt(game);
+        auto rIter = rIt(game);
+        for (auto it = get<0>(lIter); it != get<1>(lIter); ++it) {
+                if (get_eval(*it) != nullptr)
+                        left.push_back(
+                            make_shared<GameNumberReal>(*(get_eval(*it))));
+                else
+                        left.push_back(make_shared<GameNumberSets>(
+                            *it, get_eval, lIt, rIt));
+        }
+        for (auto it = get<0>(rIter); it != get<1>(rIter); ++it) {
+                if (get_eval(*it) != nullptr)
+                        right.push_back(
+                            make_shared<GameNumberReal>(*(get_eval(*it))));
+                else
+                        right.push_back(make_shared<GameNumberSets>(
+                            *it, get_eval, lIt, rIt));
+        }
+        init();
 }
 #endif
