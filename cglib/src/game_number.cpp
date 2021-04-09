@@ -23,6 +23,25 @@ bool GameNumber::operator<= (const GameNumber& other) const {
 bool GameNumber::operator>= (const GameNumber& other) const {
     return *this > other || *this == other;
 }
+bool GameNumber::operator< (const float other) const {
+    return get_float() < other;
+}
+bool GameNumber::operator> (const float other) const {
+    return get_float() > other;
+}
+bool GameNumber::operator== (const float other) const {
+    return get_float() == other;
+}
+bool GameNumber::operator!= (const float other) const {
+    return !(*this == other);
+}
+bool GameNumber::operator<= (const float other) const {
+    return *this < other || *this == other;
+}
+bool GameNumber::operator>= (const float other) const {
+    return *this > other || *this == other;
+}
+
 
 // Accessors
 bool GameNumber::is_surreal () const {

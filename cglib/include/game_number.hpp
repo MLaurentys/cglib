@@ -40,6 +40,12 @@ public:
     bool operator<  (const GameNumber& other) const;
     bool operator>= (const GameNumber& other) const;
     bool operator>  (const GameNumber& other) const;
+    bool operator== (const float other) const;
+    bool operator!= (const float other) const;
+    bool operator<= (const float other) const;
+    bool operator<  (const float other) const;
+    bool operator>= (const float other) const;
+    bool operator>  (const float other) const;
 
 protected:
     // Prevents class from being directly instaciated

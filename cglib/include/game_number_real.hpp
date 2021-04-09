@@ -10,7 +10,7 @@
 /*
  * This class represents a subset of game numbers: the real numbers
  * It is used because it allows the standard representation to avoid recursing
- *  until the '0 = <{}|{}>' base case.
+ *  until the '0 = < {} | {} >' base case.
  */
 class GameNumberReal : public GameNumber {
 public:

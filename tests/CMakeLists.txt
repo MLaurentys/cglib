@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 set(GCC_COVERAGE_COMPILE_FLAGS "-Wall -Weffc++")
 
 set(REQUIRED_LIBS gtest gmock pthread)
-set(TEST_FILES main.cpp)
+set(TEST_FILES main.cpp Tgame_number_real.cpp)
 
 FUNCTION(PREPEND var prefix)
     SET(listVar "")
