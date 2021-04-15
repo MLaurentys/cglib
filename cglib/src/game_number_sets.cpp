@@ -87,8 +87,7 @@ GameNumberSets::GameNumberSets(float number) {
 }
 
 GameNumberSets::GameNumberSets(const std::vector<float> &l,
-                               const std::vector<float> &r)
-    : {}
+                               const std::vector<float> &r) {}
 
 GameNumberSets::GameNumberSets(std::vector<std::shared_ptr<GameNumber>> &&l,
                                std::vector<std::shared_ptr<GameNumber>> &&r)
