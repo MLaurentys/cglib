@@ -14,20 +14,6 @@
 
 namespace fs = std::filesystem;
 
-bool does_compile(const std::string &programString) {
-        auto file = std::tmpfile();
-        // std::fputs(programString, file);
-        std::fputs("Hello, world", file);
-        std::rewind(file);
-        char buf[6];
-        std::fgets(buf, sizeof buf, file);
-        std::cout << buf << '\n';
+bool compiles(filename) {}
 
-        // Linux-specific method to display the tmpfile name
-        std::cout << fs::read_symlink(fs::path("/proc/self/fd") /
-                                      std::to_string(fileno(file)))
-                  << '\n';
-        return true;
-}
-
-TEST(Concept, PrimitiveTypes) { does_compile("int main() {return 0;}"); }
+TEST(Concept, PrimitiveTypes) {}
