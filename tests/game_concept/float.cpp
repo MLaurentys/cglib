@@ -1,4 +1,9 @@
-#include "../cglib/include/game_concept.hpp"
+#include "../../cglib/include/game_concept.hpp"
 #include <gtest/gtest.h>
 
-int main() {}
+template <CombinatorialGame G> void IsGame(G test) {}
+
+int main() {
+        IsGame(1.0f);
+        return 0;
+}
