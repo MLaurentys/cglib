@@ -1,29 +1,20 @@
 
-//#include "../cglib/include/game_concept.hpp"
-#include <cstdio>
-#include <cstdlib>
+#include "../cglib/include/game_concept.hpp"
 #include <filesystem>
-#include <fstream>
 #include <gtest/gtest.h>
-#include <iostream>
-#include <memory>
-#include <sstream>
 #include <string>
-#include <typeinfo>
-#include <vector>
 
-constexpr auto baseCmd = "g++ -std=c++2a -I../../cglib/include -O3 ";
+constexpr auto baseCmd = "g++ -std=c++2a -I../../cglib/include -O0";
 
-bool compiles(const std::string &filename) {
-        auto cmd = static_cast<std::string>(baseCmd) + "-o" + filename +
-                   " game_concept/" + filename;
-        std::cout << cmd << std::endl;
-        return system(cmd.c_str()) == 0;
+bool compiles(const std::string &filename, const std::string &execName) {
+        auto cmd = static_cast<std::string>(baseCmd) + " -o " + execName +
+                   " ../../tests/game_concept/" + filename;
+        bool ret = system(cmd.c_str()) == 0;
+        std::filesystem::remove(execName);
+        return ret;
 }
 
-TEST(Concept, PrimitiveTypes) { EXPECT_TRUE(compiles("float.cpp")); }
-
-// int main() {
-//         std::cout << compiles("float.cpp");
-//         return 0;
-// }
+TEST(Concept, PrimitiveTypes) {
+        ASSERT_DEATH(assert(CombinatorialGame<char *>), "");
+        ASSERT_DEATH(assert(CombinatorialGame<int>), "");
+}
