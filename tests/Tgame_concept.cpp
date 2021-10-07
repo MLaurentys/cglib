@@ -1,20 +1,18 @@
 
 #include "../cglib/include/game_concept.hpp"
+#include <cstddef>
 #include <filesystem>
 #include <gtest/gtest.h>
 #include <string>
 
-constexpr auto baseCmd = "g++ -std=c++2a -I../../cglib/include -O0";
-
-bool compiles(const std::string &filename, const std::string &execName) {
-        auto cmd = static_cast<std::string>(baseCmd) + " -o " + execName +
-                   " ../../tests/game_concept/" + filename;
-        bool ret = system(cmd.c_str()) == 0;
-        std::filesystem::remove(execName);
-        return ret;
-}
+template <CombinatorialGame G> bool IsCGame(G test) { return true; }
 
 TEST(Concept, PrimitiveTypes) {
-        ASSERT_DEATH(assert(CombinatorialGame<char *>), "");
-        ASSERT_DEATH(assert(CombinatorialGame<int>), "");
+        ASSERT_DEATH(assert(CombinatorialGame<std::nullptr_t>), "");
+        ASSERT_DEATH(assert(CombinatorialGame<void>), "");
+        EXPECT_TRUE(IsCGame(1));
+        EXPECT_TRUE(IsCGame(1.0f));
+        EXPECT_TRUE(IsCGame(1.0));
+        EXPECT_TRUE(IsCGame('a'));
+        EXPECT_TRUE(IsCGame(false));
 }
